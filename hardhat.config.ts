@@ -5,13 +5,13 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-etherscan";
 
-const privateKey: string = process.env.PRIVATE_KEY_JOSEPH!;
+const privateKey: string = process.env.PRIVATE_KEY_TEST!;
 const alchemyApiKey: string = process.env.ALCHEMY_API_KEY!;
 const etherscanApiKey: string = process.env.ETHERSCAN_API_KEY!;
 const bscApiKey: string = process.env.BSCSCAN_API_KEY!;
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "bsc_testnet",
+  defaultNetwork: "hardhat",
 
   networks: {
     goerli: {
