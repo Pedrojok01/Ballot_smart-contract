@@ -9,7 +9,7 @@
     "test:gas": "REPORT_GAS=true npx hardhat test --show-stack-traces",
     "compile": "hardhat compile --show-stack-traces",
     "flatten": "hardhat flatten-all --show-stack-traces",
-    "deploy": "hardhat run scripts/deploy.ts --network mumbai",
+    "deploy": "hardhat run scripts/deploy_ballot.ts --network mumbai",
     "verify": "hardhat verify",
     "size": "hardhat size-contracts --show-stack-traces",
     "doc": " hardhat docgen",

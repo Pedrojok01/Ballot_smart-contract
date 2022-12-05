@@ -1,7 +1,7 @@
 import hre, { ethers } from "hardhat";
 import fs from "fs";
 
-const tokenAddress = "0x629A92d7940d511F0bEb1495418d0cF6B5Cf5f4e";
+const tokenAddress = "0x6AD24CD15f9332226Fe1911cAe24F81C0A747729";
 
 async function main() {
   const Ballot = await ethers.getContractFactory("Ballot");
@@ -11,7 +11,9 @@ async function main() {
   console.log(`Ballot contract deployed successfully at ${ballot.address}`);
 
   // Get Ballot ABI
-  let abiFile = JSON.parse(fs.readFileSync("./artifacts/contracts/Ballot.sol/Ballot.json", "utf8"));
+  let abiFile = JSON.parse(
+    fs.readFileSync("./artifacts/contracts/Ballot.sol/Ballot.json", "utf8")
+  );
   let abi = JSON.stringify(abiFile.abi);
   console.log(`ABI: ${abi}`);
 
@@ -22,7 +24,7 @@ async function main() {
 
   await hre.run("verify:verify", {
     address: ballot.address,
-    constructorArguments: [tokenAddress]
+    constructorArguments: [tokenAddress],
   });
 }
 

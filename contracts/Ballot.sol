@@ -1,20 +1,19 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.16;
 
-// Uncomment this line to use console.log
 // import "hardhat/console.sol";
 import "./interfaces/IERC20Permit.sol";
 import "./interfaces/IERC20.sol";
 import "./utils/SafeERC20.sol";
+import "./abstract/Ownable.sol";
 
-contract Ballot {
+contract Ballot is Ownable {
     using SafeERC20 for IERC20Permit;
 
     /* Storage:
      ************/
 
     IERC20Permit public immutable daoToken;
-    address public immutable chairPerson;
 
     IERC20 private immutable USDC =
         IERC20(0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d);
@@ -47,14 +46,8 @@ contract Ballot {
     event VoteSubmitted(address voter, uint256 projectId);
     event PollWinnerAnnounced(uint256 polllId, Project winner);
 
-    modifier onlyOwner() {
-        require(msg.sender == chairPerson, "Not owner");
-        _;
-    }
-
     constructor(address erc20Token) {
         daoToken = IERC20Permit(erc20Token);
-        chairPerson = msg.sender;
         _projectsPerPoll[pollId].push();
     }
 
@@ -218,6 +211,6 @@ contract Ballot {
      *************/
 
     function retrieveVotedTokens() private {
-        daoToken.safeTransfer(chairPerson, daoToken.balanceOf(address(this)));
+        daoToken.safeTransfer(owner(), daoToken.balanceOf(address(this)));
     }
 }
